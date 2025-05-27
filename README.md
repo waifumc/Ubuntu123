@@ -2,8 +2,8 @@
 
 ```
 # Clone the repository
-git clone https://github.com/hopingboyz/ubuntu22.04
-cd ubuntu22.04
+git clone https://github.com/Snhvn/Ubuntu123
+cd ubuntu123
 
 # Build the Docker image
 docker build -t ubuntu-vm .
