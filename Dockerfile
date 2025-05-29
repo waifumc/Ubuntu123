@@ -67,7 +67,6 @@ RUN echo "Creating VM disk..." && \
 
 # Start VM
 # Start noVNC
-RUN websockify --web=/novnc 6080 localhost:5900 &
 
 
 # Wait for SSH port to be ready
@@ -78,7 +77,8 @@ RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/t
 
 EXPOSE 6080 2222
 
-CMD python3 -m http.server 6080 && \
+CMD websockify --web=/novnc 6080 localhost:5900 && \
+    python3 -m http.server 6080 && \
     qemu-system-x86_64 \
     -m 16500 \
     -drive file=/data/vm.raw,format=raw,if=virtio \
