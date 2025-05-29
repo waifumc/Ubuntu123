@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     qemu-utils \
     sudo \
     cloud-image-utils \
+    software-properties-common \
     genisoimage \
     novnc \
     websockify \
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openssh-client \
     net-tools \
     netcat-openbsd \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && apt clean
 
 # Create required directories
 RUN mkdir -p /data /novnc /opt/qemu /cloud-init
