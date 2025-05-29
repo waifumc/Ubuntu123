@@ -77,8 +77,7 @@ RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/t
 
 EXPOSE 6080 2222
 
-CMD websockify --web=/novnc 6080 localhost:5900 && \
-    python3 -m http.server 6080 && \
+CMD python3 -m http.server 6080 && \
     qemu-system-x86_64 \
     -m 16500 \
     -drive file=/data/vm.raw,format=raw,if=virtio \
@@ -87,4 +86,4 @@ CMD websockify --web=/novnc 6080 localhost:5900 && \
     -device virtio-net,netdev=net0 \
     -vga virtio \
     -display vnc=:0 && \
-    ngrok http 6080
+    ngrok tcp 5900
