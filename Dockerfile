@@ -79,7 +79,10 @@ WORKDIR /app
 
 EXPOSE 6080 2222
 
-CMD python3 -m http.server 6080 && \
+RUN cat <<'EOF' > /start.sh
+#!/bin/bash
+    python3 -m http.server 6080 && \
+    ngrok http 6080 &>/dev/null & && \
     qemu-system-x86_64 \
     -m 16500 \
     -drive file=/data/vm.raw,format=raw,if=virtio \
@@ -88,4 +91,9 @@ CMD python3 -m http.server 6080 && \
     -device virtio-net,netdev=net0 \
     -vga virtio \
     -display vnc=:0 && \
-    ngrok http 6080
+    
+EOF
+
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
