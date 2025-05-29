@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     websockify \
     curl \
     unzip \
+    python3-pip \
     openssh-client \
     net-tools \
     netcat-openbsd \
@@ -108,9 +109,12 @@ wait
 EOF
 
 RUN chmod +x /start.sh
+RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok && \
+    ngrok config add-authtoken
 
 VOLUME /data
 
 EXPOSE 6080 2222
 
-CMD ["/start.sh"]
+CMD python3 -m http.server 6080 & \
+    ngrok http 6080
