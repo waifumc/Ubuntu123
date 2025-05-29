@@ -78,7 +78,7 @@ RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/t
 RUN mkdir -p /app && echo "NoVNC Session Running..." > /app/index.html
 WORKDIR /app
 
-EXPOSE 6080 2222
+EXPOSE 6080
 
 RUN cat <<'EOF' > /start.sh
 #!/bin/bash
