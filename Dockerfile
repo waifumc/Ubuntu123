@@ -91,7 +91,7 @@ RUN cat <<'EOF' > /start.sh
     -netdev user,id=net0,hostfwd=tcp::2222-:22 \
     -device virtio-net,netdev=net0 \
     -vga virtio \
-    -display vnc=:0 && \
+    -display vnc=:0
     
 EOF
 
