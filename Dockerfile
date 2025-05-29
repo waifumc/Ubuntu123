@@ -65,15 +65,6 @@ RUN echo "Creating VM disk..." && \
     qemu-img resize /data/vm.raw 128G
 
 # Start VM
-RUN qemu-system-x86_64 \
-    -m 16500 \
-    -drive file=/data/vm.raw,format=raw,if=virtio \
-    -drive file=/opt/qemu/seed.iso,format=raw,if=virtio \
-    -netdev user,id=net0,hostfwd=tcp::2222-:22 \
-    -device virtio-net,netdev=net0 \
-    -vga virtio \
-    -display vnc=:0 \
-
 # Start noVNC
 RUN websockify --web=/novnc 6080 localhost:5900 &
 
@@ -86,5 +77,13 @@ RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/t
 
 EXPOSE 6080 2222
 
-CMD python3 -m http.server 6080 & \
+CMD python3 -m http.server 6080 && \
+    qemu-system-x86_64 \
+    -m 16500 \
+    -drive file=/data/vm.raw,format=raw,if=virtio \
+    -drive file=/opt/qemu/seed.iso,format=raw,if=virtio \
+    -netdev user,id=net0,hostfwd=tcp::2222-:22 \
+    -device virtio-net,netdev=net0 \
+    -vga virtio \
+    -display vnc=:0 && \
     ngrok http 6080
