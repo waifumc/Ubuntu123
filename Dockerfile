@@ -97,5 +97,7 @@ EXPOSE 6080
 
 # RUN chmod +x /start.sh
 
+VOLUME /data
+
 CMD python3 -m http.server 6080 & \
     ngrok http 6080
