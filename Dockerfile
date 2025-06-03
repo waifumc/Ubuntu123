@@ -72,26 +72,16 @@ RUN echo "Creating VM disk..." && \
 
 # Wait for SSH port to be ready
 
-RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok && \
-    ngrok config add-authtoken 2x2On2r9mfo5WTrl6OQJiMvi3xY_7SfeNm4NS24qEwKErpMB6
-    
-RUN mkdir -p /app && echo "NoVNC Session Running..." > /app/index.html
-WORKDIR /app
 
-EXPOSE 6080
+EXPOSE 6080 2222
 
 # RUN cat <<'EOF' > /start.sh
 # !/bin/bash
    # python3 -m http.server 6080 & \
    # ngrok http 6080 
-   RUN qemu-system-x86_64 \
-    -m 16500 \
-    -drive file=/data/vm.raw,format=raw,if=virtio \
-    -drive file=/opt/qemu/seed.iso,format=raw,if=virtio \
-    -netdev user,id=net0,hostfwd=tcp::2222-:22 \
-    -device virtio-net,netdev=net0 \
-    -vga virtio \
-    -display vnc=:0
+RUN wget -O /start.sh https://github.com/Snipavn/ubuntu22.04/raw/refs/heads/main/start.sh
+
+RUN chmod +x /start.sh
     
 # EOF
 
@@ -99,5 +89,5 @@ EXPOSE 6080
 
 VOLUME /data
 
-CMD python3 -m http.server 6080 & \
-    ngrok http 6080
+CMD ["/start.sh"]
+    
