@@ -61,28 +61,16 @@ RUN curl -L https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip -o /tmp/
     mv /tmp/noVNC-1.3.0/* /novnc && \
     rm -rf /tmp/novnc.zip /tmp/noVNC-1.3.0
 
-# Start script
 
-# Start VM
-# Start noVNC
-
-
-# Wait for SSH port to be ready
 
 
 EXPOSE 6080 2222
 
-# RUN cat <<'EOF' > /start.sh
-# !/bin/bash
-   # python3 -m http.server 6080 & \
-   # ngrok http 6080 
-RUN wget -O /start.sh https://github.com/Snipavn/ubuntu22.04/raw/refs/heads/main/start.sh
+
+RUN wget -O /start.sh https://github.com/Snhvn/Ubuntu123/raw/refs/heads/main/start.sh
 
 RUN chmod +x /start.sh
     
-# EOF
-
-# RUN chmod +x /start.sh
 
 VOLUME /data
 
