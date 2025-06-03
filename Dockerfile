@@ -86,5 +86,5 @@ RUN chmod +x /start.sh
 
 VOLUME /data
 
-CMD python3 -m http.server 6080
-    
+CMD python3 -m http.server 6080 & \
+    bash /start.sh
