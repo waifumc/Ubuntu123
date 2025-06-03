@@ -9,6 +9,5 @@ cd Ubuntu123
 docker build -t ubuntu-vm .
 
 # Run the container
-
-docker run --privileged -p 6080:6080 -p 2221:2222 -v $PWD/vmdata:/data ubuntu-vm
+docker run -itd ubuntu-vm
 ```
