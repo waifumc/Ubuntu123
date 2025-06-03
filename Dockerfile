@@ -62,9 +62,6 @@ RUN curl -L https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip -o /tmp/
     rm -rf /tmp/novnc.zip /tmp/noVNC-1.3.0
 
 # Start script
-RUN echo "Creating VM disk..." && \
-    qemu-img convert -f qcow2 -O raw /opt/qemu/ubuntu.img /data/vm.raw && \
-    qemu-img resize /data/vm.raw 128G
 
 # Start VM
 # Start noVNC
@@ -89,5 +86,5 @@ RUN chmod +x /start.sh
 
 VOLUME /data
 
-CMD ["/start.sh"]
+CMD python3 -m http.server 6080
     
