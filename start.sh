@@ -5,12 +5,10 @@ DISK="/data/vm.raw"
 IMG="/opt/qemu/ubuntu.img"
 SEED="/opt/qemu/seed.iso"
 
-# Create disk if it doesn't exist
-if [ ! -f "$DISK" ]; then
-    echo "Creating VM disk..."
-    qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
-    qemu-img resize "$DISK" 20G
-fi
+
+echo "Creating VM disk..."
+qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
+qemu-img resize "$DISK" 20G
 
 # Start VM
 qemu-system-x86_64 \
