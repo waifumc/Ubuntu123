@@ -8,7 +8,7 @@ SEED="/opt/qemu/seed.iso"
 
 echo "Creating VM disk..."
 qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
-qemu-img resize "$DISK" 128G
+qemu-img resize "$DISK" 30G
 
 # Start VM
 qemu-system-x86_64 \
@@ -28,7 +28,7 @@ echo "================================================"
 echo " 🖥️  VNC: http://localhost:6080/vnc.html"
 echo " 🔐 SSH: ssh root@localhost -p 2222"
 echo " 🧾 Login: root / root"
-echo " Supported Code Sandbox"
+echo " Supported Code Sandbox (use ngrok)"
 echo " Code By Snipavn/Snhvn (Github) Youtube: https://youtube.com/@snipavn205 & Youtube: HopingBoyz" 
 echo "================================================"
 
