@@ -58,9 +58,11 @@ curl -L https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip -o /tmp/novn
 unzip /tmp/novnc.zip -d /tmp && \
 mv /tmp/noVNC-1.3.0/* /novnc && \
 rm -rf /tmp/novnc.zip /tmp/noVNC-1.3.0
+# Cài đặt cloudflare
+sudo mkdir -p --mode=0755 /usr/share/keyrings && \
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null && echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list && sudo apt-get update && sudo apt-get install cloudflared
 # Tải file start.sh để bắt đầu khởi chạy
 wget -O start.sh https://github.com/Snhvn/Ubuntu123/raw/refs/heads/main/start1.sh
-#
 clear
 echo "Đang chạy vui lòng đừng tắt"
 chmod +x start.sh && \
