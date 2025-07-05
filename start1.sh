@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
-echo "Nhập số ram của bạn"
 
+echo "Nhập số Gram của bạn (ví dụ: nếu muốn có 8gb ram thì nhập số 8 thôi"
+read ram1
 DISK="/data/vm.raw"
 IMG="/opt/qemu/ubuntu.img"
 SEED="/opt/qemu/seed.iso"
