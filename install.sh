@@ -59,7 +59,7 @@ unzip /tmp/novnc.zip -d /tmp && \
 mv /tmp/noVNC-1.3.0/* /novnc && \
 rm -rf /tmp/novnc.zip /tmp/noVNC-1.3.0
 # Tải file start.sh để bắt đầu khởi chạy
-wget -O start.sh https://github.com/Snhvn/Ubuntu123/raw/refs/heads/main/start.sh
+wget -O start.sh https://github.com/Snhvn/Ubuntu123/raw/refs/heads/main/start1.sh
 #
 clear
 echo "Đang chạy vui lòng đừng tắt"
