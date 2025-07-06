@@ -29,7 +29,7 @@ curl -L https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd6
 echo "instance-id: servertipacvn\nlocal-hostname: servertipacvn" > /cloud-init/meta-data
 
 # Chỉnh sửa config image ubuntu
-RUN printf "#cloud-config\n\
+printf "#cloud-config\n\
 preserve_hostname: false\n\
 hostname: servertipacvn\n\
 users:\n\
