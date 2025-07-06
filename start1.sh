@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-echo "Nhập số Gb ram của bạn (ví dụ: nếu muốn có 8gb ram thì nhập số 8 thôi"
-read ram1
 DISK="/data/vm.raw"
 IMG="/opt/qemu/ubuntu.img"
 SEED="/opt/qemu/seed.iso"
-RAM="$ram1"
 if [ ! -f "$DISK" ]; then
  echo "Creating VM disk..."
  qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
@@ -14,7 +11,7 @@ if [ ! -f "$DISK" ]; then
 fi
 # Start VM
 qemu-system-x86_64 \
-    -m "$RAM"G \
+    -m 8G \
     -drive file="$DISK",format=raw,if=virtio \
     -drive file="$SEED",format=raw,if=virtio \
     -netdev user,id=net0,hostfwd=tcp::2222-:22 \
