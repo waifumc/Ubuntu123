@@ -31,7 +31,7 @@ echo " Supported Code Sandbox (use ngrok or cloudflare)"
 echo " Code By Snipavn/Snhvn (Github) Youtube: https://youtube.com/@snipavn205 & Youtube: HopingBoyz" 
 echo "================================================"
 
-echo "Muốn vào được web noVNC thì mở tab mới (Ctrl + B +C) nhập lệnh là "cloudflared tunnel --url http://localhost:6080"
+echo "Muốn vào được web noVNC thì mở tab mới (Ctrl + B +C) nhập lệnh là cloudflared tunnel --url http://localhost:6080"
 
 # Wait for SSH port to be ready
 for i in {1..30}; do
