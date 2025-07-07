@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
-
+echo "Bạn muốn bao nhiêu disk tùy máy (ví dụ muốn 128G thì nhập 128)"
+read disk1
 DISK="/data/vm.raw"
 IMG="/opt/qemu/ubuntu.img"
 SEED="/opt/qemu/seed.iso"
+DISK2="$disk1"
 if [ ! -f "$DISK" ]; then
  echo "Creating VM disk..."
  qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
- qemu-img resize "$DISK" 30G
+ qemu-img resize "$DISK" "$DISK2"G
 fi
 # Start VM
 qemu-system-x86_64 \
