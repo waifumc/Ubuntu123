@@ -8,7 +8,7 @@ SEED="/opt/qemu/seed.iso"
  
 echo "Creating VM disk..."
 qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
-qemu-img resize 128 30G
+qemu-img resize "$DISK" 128G
 # Start VM
 qemu-system-x86_64 \
     -m 12G \
