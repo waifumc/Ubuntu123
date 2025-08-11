@@ -11,24 +11,14 @@ qemu-img convert -f qcow2 -O raw "$IMG" "$DISK"
 qemu-img resize "$IMG" 128G
 # Start VM
 qemu-system-x86_64 \
-    -m 12G \
+    -m 5G \
+    -cpu max \
+    -accel tcg,thread=multi \
     -drive file="$DISK",format=raw,if=virtio \
     -drive file="$SEED",format=raw,if=virtio \
-    -netdev user,id=net0,hostfwd=tcp::2222-:22 \
+    -netdev user,id=net0,hostfwd=tcp::2222-:22,dns=1.1.1.1 \
     -device virtio-net,netdev=net0 \
-    -vga virtio \
-    -display vnc=:0 \
-    -daemonize
+    -nographic
 
-# Start noVNC
-websockify --web=/novnc 6080 localhost:5900 &
-
-echo "================================================"
-echo " 🖥️  VNC: http://localhost:6080/vnc.html"
-echo " 🔐 SSH: ssh root@localhost -p 2222"
-echo " 🧾 Login: root / root"
-echo " Supported Code Sandbox (use ngrok or cloudflare)"
-echo " Code By Snipavn/Snhvn (Github) Youtube: https://youtube.com/@snipavn205 & Youtube: HopingBoyz" 
-echo "================================================"
-
-wait
+apt install tmate
+tmate
