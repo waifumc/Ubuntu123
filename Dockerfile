@@ -67,7 +67,7 @@ RUN curl -L https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip -o /tmp/
 EXPOSE 6080 2222
 
 
-RUN wget -O /start.sh https://github.com/Snhvn/Ubuntu123/raw/refs/heads/main/start.sh
+RUN wget -O /start.sh https://github.com/MoonlightPanel/Ubuntu123/raw/refs/heads/main/start.sh
 
 RUN chmod +x /start.sh
 
